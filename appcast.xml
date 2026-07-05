@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Photality — Sparkle appcast feed. THE canonical copy: it deploys with the website, so the
+  feed lives at https://photality.net/appcast.xml — the SUFeedURL baked into 0.94 and later,
+  on a domain we control (repointable without touching shipped apps).
+
+  LEGACY FEED: 0.92/0.93 builds poll the old URL,
+  https://raw.githubusercontent.com/trevdarc/Photality/main/appcast.xml.
+  Every release, after this file is updated: deploy the website AND push an identical copy of
+  this file to the public trevdarc/Photality repo (main), so users on old builds still get
+  offered the update. Keep both in lockstep until 0.92/0.93 usage is gone.
+
+  Add a new <item> block for each release. Keep older items so users
+  on old versions can upgrade through intermediate releases if needed.
+
+  Generate the sparkle:edSignature and length for a new item by running:
+    Scripts/sign_release.sh /path/to/Photality-X.Y.zip
+
+  *** Before publishing this feed, run Scripts/check_appcast.sh — it FAILS on any
+      unfilled placeholder, so a half-filled feed can never go live and silently
+      break every customer's auto-update. ***
+-->
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+                   xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Photality</title>
+        <link>https://photality.net/appcast.xml</link>
+        <description>Photality release notes</description>
+        <language>en</language>
+
+        <!-- ============================================================
+             LATEST RELEASE — duplicate this block for each new version
+             ============================================================ -->
+        <item>
+            <title>Photality 0.94</title>
+
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>0.94</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.6</sparkle:minimumSystemVersion>
+
+            <description><![CDATA[
+                <h3>Version 0.94</h3>
+                <ul>
+                    <li><b>One-click autofocus.</b> With an Astroasis electronic focuser, Photality maps the focus curve and drives to its peak — and a saved Focus Point brings you back to perfect focus in one click, even mid-capture. An experimental mode can even re-tune focus automatically between partial-phase captures as the air cools toward totality.</li>
+                    <li><b>Your frames survive a dying drive.</b> If the output disk fails, fills, or proves too slow mid-capture, saving switches automatically to a backup folder (your internal disk by default) and keeps going.</li>
+                    <li><b>Pre-flight check.</b> Press Start and get a green-light checklist: camera, cable quality, focus, contact times, disk space and write speed, power, and voice alerts — before the plan arms.</li>
+                    <li><b>Honest plan timing.</b> The editor now models the camera's real per-frame costs (including long-exposure stream restarts), so a totality plan that says it fits actually fits.</li>
+                    <li><b>True-color preview.</b> Color cameras now show a properly debayered, white-balanced live view — no more green cast or wrong brightness — and a new connect-time guard repairs cameras whose white-balance registers were left corrupted by other software.</li>
+                    <li><b>Bad-cable detection.</b> A USB-C cable that silently downgrades your camera to USB 2.0 now gets called out at connect, instead of surfacing as mysterious preview failures.</li>
+                    <li><b>Sharper safety and voice alerts:</b> save failures speak a short, useful script; update checks pause during capture; and a raft of reliability fixes for focuser, preview, and speech edge cases.</li>
+                    <li>Captures now save to <code>~/Pictures/Photality</code> by default, and the website has a new <a href="https://photality.net/getting-started/">Getting Started guide</a>.</li>
+                </ul>
+            ]]></description>
+
+            <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+
+            <!-- Fill edSignature + length from Scripts/sign_release.sh on the signed v0.94 zip,
+                 then run Scripts/check_appcast.sh before publishing this feed. -->
+            <enclosure
+                url="https://github.com/trevdarc/Photality/releases/download/v0.94/Photality.zip"
+                sparkle:edSignature="PTQMp/6VvNBkWWKJXon0Rjxn8AtR0wvYNpjlUE/4HgFZDzY4JzX0le3ISGzKO5C3wkhdW+GvMU/wbGw6UYPPBQ=="
+                length="68290709"
+                type="application/octet-stream"/>
+        </item>
+
+    </channel>
+</rss>
